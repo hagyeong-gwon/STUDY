@@ -55,6 +55,39 @@ WAN(Wide Area Network)은 LAN에 대해 상대적인 개념의 의미로 광역�
 정보통신에서 통신의 당사자들이 지켜야 할 약속으로서 '통신규약'이라고 생각하면 된다.
 <br><br>
 
+## URI 
+
+<br>
+
+웹 서버 리소스는 각자 이름을 갖고 있는데 이 서버 리소스 이름은 통합 자원 식별자(Uniform Resource Identifier), 즉 URI로 불린다.
+
+URI에는 두 가지가 있는데, URL과 URN이라는 것이다. 
+
+- URL
+    
+    URL(Uniform Resource Locator)은 특정 서버의 한 리소스에 대한 구체적인 위치를 서술한다.
+
+    ![image](https://user-images.githubusercontent.com/70934609/95097812-df57d280-0768-11eb-9abb-f6854d1d0b34.png)
+
+    대부분의 URL은 세 부분으로 이루어진 표준 포맥을 따른다. 
+
+    - URL의 첫 번째 부분은 scheme이라고 불리는데 리소스에 접근하기 위해 사용되는 프로토콜을 서술한다.
+    
+    - 두 번째 부분(whatis.techtarget.com)은 서버의 인터넷 주소를 제공한다.
+
+    - 마지막(/glossaries)은 웹 서버의 리소스를 가리킨다.
+
+    **오늘 날 대부분의 URI는 URL이다.**
+
+- URN
+
+    URN(Uniform Resource Name)은 콘텐츠를 이루는 한 리소스에 대해, 그 리소스의 위치에 영향 뱓지 않는 유일무이한 이름 역할을 한다. 
+
+    URN은 여전히 실험 중인 상태고 아직 널리 채택되지 않았다. 
+
+
 ## 참조
 
 https://dany-it.tistory.com/6
+
+HTTP 완벽 가이드 (책)
