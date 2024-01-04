@@ -1,15 +1,40 @@
+package DFS;
+
 import java.util.*;
 
-class Solution {
-  public static void main(String[] args) {
+public class Trip {
+  public static LinkedList<String> find(HashMap<String, LinkedList<String>> map, String now, Integer cnt, LinkedList<String> answer){
+    answer.addLast(now);
 
-    String[][] tickets = {{"ICN", "SFO"}, {"ICN", "ATL"}, {"SFO", "ATL"}, {"ATL", "ICN"}, {"ATL", "SFO"}};
+    LinkedList<String> nextTickets = map.get(now);
+    if (nextTickets == null || nextTickets.isEmpty()) {
+      return answer;
+    }
+    nextTickets.sort((a, b) -> a.compareTo(b));
+
+    for (Integer i = 0; i< nextTickets.size(); i++) {
+      String next = nextTickets.poll();
+      map.put(now, nextTickets);
+//      answer.push(now);
+      find(map, next, cnt, answer);
+      if (answer.size() == cnt) return answer;
+
+      answer.pollLast();
+
+      nextTickets.addLast(next);
+      map.put(now, nextTickets);
+    }
+
+    return answer;
+  }
+  public static void main(String[] args) {
+    //    String[][] tickets = {{"ICN", "SFO"}, {"ICN", "ATL"}, {"SFO", "ATL"}, {"ATL", "ICN"}, {"ATL", "SFO"}};
+    String[][] tickets = {{"ICN", "BOO"}, {"ICN", "COO"}, {"COO", "DOO"}, {"DOO", "COO"}, {"BOO", "DOO"},{"DOO", "BOO"}, {"BOO", "ICN"}, {"COO", "BOO"} };
     System.out.print(solution(tickets).toString());
   }
 
-  public static String[] solution(String[][] tickets) {
-    String[] answer = new String[tickets.length + 1];
-    answer[0] = "ICN";
+  public static LinkedList<String> solution(String[][] tickets) {
+    LinkedList<String> answer = new LinkedList<>();
     HashMap<String, LinkedList<String>> map = new HashMap<>();
 
     for (int i = 0; i < tickets.length; i++) {
@@ -17,30 +42,20 @@ class Solution {
       String value = tickets[i][1];
 
       LinkedList<String> words = map.get(key);
+
       if (words == null) {
         words = new LinkedList<String>();
         words.add(value);
         map.put(key, words);
       } else {
         words.add(value);
-        words.sort((a, b) -> a.compareTo(b));
         map.put(key, words);
       }
     }
 
+    System.out.println(map.toString());
+//    map = {'ICN':['a', 'v']}
 
-    for (int i = 1; i < answer.length; i++) {
-      String now = answer[i - 1];
-      LinkedList<String> nextPlaces = map.get(now);
-      System.out.println(now);
-      System.out.println(nextPlaces.toString());
-      if (nextPlaces.size() > 0) {
-        String next = nextPlaces.poll();
-
-        answer[i] = next;
-        map.put(now, nextPlaces);
-      }
-    }
-    return answer;
+    return find(map, "ICN", tickets.length + 1, answer);
   }
 }
